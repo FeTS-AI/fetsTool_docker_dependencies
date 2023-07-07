@@ -1,4 +1,5 @@
 FROM ubuntu:focal-20230605
+ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL authors="CBICA_UPenn <software@cbica.upenn.edu>"
 
@@ -11,13 +12,13 @@ LABEL authors="CBICA_UPenn <software@cbica.upenn.edu>"
 
 RUN apt update -y
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu xenial main" | sudo tee /etc/apt/sources.list.d/xenial.list \
+RUN echo "deb http://archive.ubuntu.com/ubuntu xenial main" | tee /etc/apt/sources.list.d/xenial.list \
     apt-get update \
-    update-alternatives --remove-all gcc \
-    update-alternatives --remove-all g++ \
-    apt-get install gcc-5 g++-5 \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 10 \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 10
+    apt-get purge gcc \
+    apt-get purge g++ \
+    apt-get install gcc-5 g++-5 
+    #update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 10 \
+    #update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 10
 
 #general dependencies
 # RUN yum install -y \
@@ -73,7 +74,6 @@ RUN apt-get install -y \
     libmpfr-dev \
     libgmp-dev \
     dos2unix \
-    fuse-sshfs \
     doxygen 
 
 
