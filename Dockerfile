@@ -1,4 +1,4 @@
-FROM ubuntu/focal
+FROM ubuntu:focal-20230605
 
 LABEL authors="CBICA_UPenn <software@cbica.upenn.edu>"
 
