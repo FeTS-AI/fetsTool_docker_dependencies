@@ -1,83 +1,38 @@
-FROM ubuntu:focal-20230605
+FROM ubuntu:xenial
 ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL authors="CBICA_UPenn <software@cbica.upenn.edu>"
 
-# cmake installation
-# RUN wget https://cmake.org/files/v3.12/cmake-3.12.4-Linux-x86_64.tar.gz; \
-#     tar -xf cmake-3.12.4-Linux-x86_64.tar.gz; \
-
-# ENV HOME=/opt/app-root/src \
-#     PATH=/opt/app-root/src/bin:/opt/app-root/bin:/opt/rh/devtoolset-4/root/usr/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
-RUN apt update -y
-
-RUN echo "deb http://archive.ubuntu.com/ubuntu xenial main" | tee /etc/apt/sources.list.d/xenial.list \
-    apt-get update \
-    apt-get purge gcc \
-    apt-get purge g++ \
-    apt-get install gcc-5 g++-5 
-    #update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 10 \
-    #update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 10
+RUN apt-get update && apt-get update --fix-missing
 
 #general dependencies
-# RUN yum install -y \
-#     sudo \
-#     #devtoolset-4 \
-#     #devtoolset-4-gcc* \
-#     # gcc \
-#     # gcc-c++ \
-#     make \
-#     yum-utils \
-#     wget \
-#     git-core \
-#     lapack \
-#     lapack-devel \
-#     unzip \
-#     tcl \
-#     tcl-devel \
-#     tk \
-#     tk-devel \
-#     fftw \
-#     fftw-devel \
-#     mpich \
-#     mpich-devel \
-#     mesa-libGL \
-#     mesa-libGL-devel \
-#     xorg-x11-server-Xorg \
-#     xorg-x11-xauth \
-#     xorg-x11-apps \
-#     libXt-devel \
-#     tcl \
-#     time \
-#     libmpc-devel \
-#     mpfr-devel \
-#     gmp-devel \
-#     dos2unix \
-#     fuse-sshfs \
-#     doxygen
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     build-essential \
+    sudo \
     libssl-dev \
     make \
+    gcc-5 \
+    g++-5 
+RUN apt-get update && apt-get install -y \
     wget \
     git \
     liblapack-dev \
     unzip \
     tcl \
-    tcl-dev \
+    tcl-dev 
+RUN apt-get update && apt-get install -y \
     tk \
     tk-dev \
     libgl1-mesa-dev \
     libxt-dev \
     libmpc-dev \
-    libmpfr-dev \
+    libmpfr-dev 
+RUN apt-get update && apt-get install -y \
     libgmp-dev \
     dos2unix \
-    doxygen 
-
-
-
+    doxygen \
+    libubsan0 \
+    libcilkrts5 
 
 # installing CMake
 RUN rm -rf /usr/bin/cmake; \
