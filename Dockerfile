@@ -8,6 +8,7 @@ RUN apt-get update && apt-get update --fix-missing
 #general dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    apt-utils \
     sudo \
     libssl-dev \
     make \
