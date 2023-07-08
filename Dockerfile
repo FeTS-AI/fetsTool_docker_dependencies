@@ -1,13 +1,14 @@
 FROM ubuntu:xenial
 ARG DEBIAN_FRONTEND=noninteractive
 
-LABEL authors="CBICA_UPenn <software@cbica.upenn.edu>"
+LABEL authors="FeTS_AI <admin@fets.ai>"
 
 RUN apt-get update && apt-get update --fix-missing
 
 #general dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    apt-utils \
     sudo \
     libssl-dev \
     make \
