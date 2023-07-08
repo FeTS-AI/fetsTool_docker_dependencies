@@ -22,20 +22,11 @@ jobs:
       packages: write
       id-token: write
     strategy:
-      fail-fast: false # So that remaining jobs don't instantly quit if one fails (e.g, CPU/ROCm don't upload if CUDA just fails to push to ghcr...)
-      # matrix:
-        # include: # Platform locates Dockerfile ("Dockerfile-{PLATFORM}"), docker tag has to be all lowercase alphanumeric for mysterious docker reasons
-          # - platform: CPU
-          #   dockertag: cpu
-          # - platform: ROCm
-          #   dockertag: rocm
+      fail-fast: false 
 
     steps:
     - name: Check out the repository
       uses: actions/checkout@v3
-      # with:
-      #   lfs: false
-      #   submodules: 'recursive'
         
     - name: Docker prune to save space # If you switch to self-hosted runners, this should be removed.
       run: echo y | docker system prune -a
