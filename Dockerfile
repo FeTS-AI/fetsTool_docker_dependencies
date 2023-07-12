@@ -58,7 +58,7 @@ RUN cd CaPTk &&  git pull; \
 
 RUN cd CaPTk/bin && echo "=== Starting CaPTk Superbuild ===" && \
     if [ ! -d "`pwd`/qt" ] ; then wget https://github.com/CBICA/CaPTk/raw/master/binaries/qt_5.12.1/linux.zip -O qt.zip; fi ; \
-    cmake -DCMAKE_INSTALL_PREFIX=./install_libs -DQT_DOWNLOAD_FORCE=OFF -Wno-dev .. && make -j2 && rm -rf qt.zip
+    cmake -DCMAKE_INSTALL_PREFIX=./install_libs -DQT_DOWNLOAD_FORCE=OFF -Wno-dev .. && make -j$(nproc) && rm -rf qt.zip && cd .. && mkdir Front-End
 
 ARG CMAKE_PREFIX_PATH=`pwd`/CaPTk/bin/ITK-build:`pwd`/CaPTk/bin/DCMTK-build
 ENV CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH
