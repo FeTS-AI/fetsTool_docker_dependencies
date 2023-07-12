@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL authors="FeTS_AI <admin@fets.ai>"
