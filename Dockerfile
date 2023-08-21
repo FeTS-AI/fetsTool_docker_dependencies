@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
+FROM ubuntu:bionic
 ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL authors="FeTS_AI <admin@fets.ai>"
